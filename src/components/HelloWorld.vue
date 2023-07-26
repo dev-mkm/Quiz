@@ -111,12 +111,12 @@
       <div class="py-10" />
       <h1 class="text-h4 font-weight-bold text-left">Question {{ idx+1 }}/{{ count }}</h1>
       <div class="py-5" />
-      <v-card :title="questions[idx]['question']" style="background: aliceblue;" class="pb-8">
-        <v-btn v-for="(answer, index) in questions[idx].answers" @click="answered(index)" class="w-75 mt-4"
+      <v-card :title="questions[idx]['question']" style="background: aliceblue;" class="pa-8 text-left">
+        <v-btn v-for="(answer, index) in questions[idx].answers" @click="answered(index)" class="w-100 mt-4"
         :key="index" :class="{'disable-events': selectedAnswer != ''}, {'green' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'red' : (index != questions[idx].correctAnswer && selectedAnswer == index) || (index != questions[idx].correctAnswer && selectedAnswer == 'wrong')}" variant="outlined">
           {{answer}}
         </v-btn>
-        <div class="pt-6 px-15 d-flex justify-space-between">
+        <div class="pt-6 d-flex justify-space-between">
           <v-btn @click="skip()" variant="text">
             Skip
           </v-btn>
