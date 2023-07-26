@@ -86,7 +86,7 @@
 <template>
   <v-container class="fill-height" style="max-width: 700px;">
     <v-responsive v-if="idx == -1" class="align-center text-center fill-height">
-      <v-avatar image="icon.png" size="200"></v-avatar>
+      <v-avatar image="../../public/icon.png" size="200"></v-avatar>
       <h1 class="text-h3 font-weight-bold">به مسابقه بزرگ ماه خوش آمدید</h1>
 
       <div class="py-2" />
