@@ -12,19 +12,19 @@
         questions: [
           {
             question:
-              "رولکس شرکتی است که در چه نوع محصولی تخصص دارد؟",
-            answers: { a: "کیف", b: "ساعت", c: "کفش", d: "لپتاپ" },
+              "Rolex is a company that specializes in what type of product?",
+            answers: { a: "Bags", b: "Watches", c: "Shoes", d: "Laptops" },
             correctAnswer: "b",
           },
           {
-            question: "فیس بوک چه زمانی راه اندازی شد؟",
+            question: "When did Facebook launch?",
             answers: { a: "2005", b: "2008", c: "2003", d: "2004" },
             correctAnswer: "d",
           },
           {
             question:
-              "آلبرت انیشتین زمانی که در مدرسه بود با ریاضیات مشکل داشت؟",
-            answers: { a: "بله", b: "خیر" },
+              "Albert Einstein had trouble with mathematics when he was in school?",
+            answers: { a: "True", b: "False" },
             correctAnswer: "b",
           },
         ],
@@ -85,19 +85,18 @@
 
 <template>
   <v-container class="fill-height" style="max-width: 700px;">
-    <v-responsive v-if="idx == -1" class="align-center text-center fill-height">
-      <v-avatar image="../../public/icon.png" size="200"></v-avatar>
-      <h1 class="text-h3 font-weight-bold">به مسابقه بزرگ ماه خوش آمدید</h1>
+    <v-responsive v-if="idx == -1" class="align-center text-left fill-height">
+      <h1 class="text-h3 font-weight-bold">Let's Play Quiz</h1>
 
       <div class="py-2" />
 
-      <div class="text-h5 font-weight-light">لطفا اطلاعات خود را وارد کنید</div>
+      <div class="text-h5 font-weight-light">Enter your information below</div>
 
       <div class="py-10" />
 
-      <v-text-field label="نام و نام خانوادگی" variant="outlined" v-model="name"></v-text-field>
+      <v-text-field label="Full Name" variant="outlined" v-model="name"></v-text-field>
       <v-btn class="w-100 mcolor" @click="start()" :class="{'disable-events': name == ''}">
-        شروع مسابقه
+        LET'S START QUIZ
       </v-btn>
     </v-responsive>
     <v-responsive v-else-if="idx < count" class="align-center text-center fill-height">
@@ -107,41 +106,39 @@
         color="#52b788"
         rounded
       >
-        <strong>{{ countDown > 0 ? countDown + ' ثانیه' : 'زمان به اتمام رسید' }}</strong>
+        <strong>{{ countDown > 0 ? countDown + 'Sec' : 'Out of Time' }}</strong>
       </v-progress-linear>
       <div class="py-10" />
-      <h1 class="text-h4 font-weight-bold text-right">سوال {{ idx+1 }}/{{ count }}</h1>
+      <h1 class="text-h4 font-weight-bold text-left">Question {{ idx+1 }}/{{ count }}</h1>
       <div class="py-5" />
-      <v-card :title="questions[idx]['question']" style="background: aliceblue;" class="pa-8 text-right">
+      <v-card :title="questions[idx]['question']" style="background: aliceblue;" class="pa-8 text-left">
         <v-btn v-for="(answer, index) in questions[idx].answers" @click="answered(index)" class="w-100 mt-4"
         :key="index" :class="{'disable-events': selectedAnswer != ''}, {'green' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'red' : (index != questions[idx].correctAnswer && selectedAnswer == index) || (index != questions[idx].correctAnswer && selectedAnswer == 'wrong')}" variant="outlined">
           {{answer}}
         </v-btn>
         <div class="pt-6 d-flex justify-space-between">
-          <v-btn @click="skip()" :disabled="selectedAnswer != ''" variant="text">
-            رد شدن
+          <v-btn @click="skip()" variant="text">
+            Skip
           </v-btn>
           <v-btn class="mcolor" @click="nextQuestion" v-show="selectedAnswer != '' && idx < count - 1" variant="text">
-            سوال بعد
+            Next
           </v-btn>
           <v-btn class="mcolor" @click="showResults" v-show="selectedAnswer != '' && idx == count - 1" variant="text">
-            اتمام مسابقه
+            Finish
           </v-btn>
         </div>
       </v-card>
     </v-responsive>
     <v-responsive v-else class="align-center text-center fill-height">
-      <h1 class="text-h3 font-weight-bold">امتیاز شما</h1>
+      <h1 class="text-h3 font-weight-bold">Score</h1>
 
       <div class="py-7" />
 
-      <div class="text-h4 font-weight-light d-flex justify-center"><div class="mx-10">{{correctAnswers}} / {{ count }}</div><div >|</div><div class="mx-10">{{ Math.ceil(correctAnswers * 100 / count) }}%</div></div>
-      <div class="py-7" />
-      <div class="text-h5 font-weight-light">تعداد شرکت کنندگان: 10</div>
+      <div class="text-h4 font-weight-light">{{correctAnswers}} / {{ count }}</div>
 
       <div class="py-15" />
       <v-btn class="w-100 mcolor" @click="resetQuiz()" :class="{'disable-events': name == ''}">
-        بازگشت به صفحه اصلی
+        GO BACK
       </v-btn>
     </v-responsive>
   </v-container>
